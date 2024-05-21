@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bewerbungsformular</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+    <style>
+        body {
+            padding: 20px;
+        }
+
+        .form-section {
+            margin-bottom: 20px;
+        }
+
+        .custom-file-label::after {
+            content: "Browse";
+        }
+
+        #signature-pad-container {
+            border: 1px solid #ced4da;
+            border-radius: .25rem;
+            padding: 10px;
+            position: relative;
+        }
+
+        #signature-pad {
+            width: 100%;
+            height: 200px;
+        }
+
+        .clear-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            color: red;
+            font-size: 1.2em;
+        }
+
+        .remove-btn {
+            cursor: pointer;
+            color: red;
+            font-size: 0.9em;
+        }
+
+        .file-drop-area {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 150px;
+            border: 2px dashed #ced4da;
+            border-radius: .25rem;
+            background-color: #f8f9fa;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .file-drop-area input[type="file"] {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .file-drop-area .icon {
+            font-size: 2em;
+            color: #6c757d;
+        }
+
+        .file-drop-area .instructions {
+            font-size: 1em;
+            color: #6c757d;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="text-center mb-4">
+            <img src="https://www.hm-oberberg.de/img/HM-Oberberg/logo-hm-oberberg.png" alt="HM-Oberberg Dienstleistungen GmbH" class="img-fluid">
+            <h2>Bewerbungsformular</h2>
+            <p>HM-Oberberg Dienstleistungen GmbH</p>
+        </div>
+        <form id="application-form" action="submit_application.php" method="POST" enctype="multipart/form-data">
+            <!-- Personal Information -->
+            <div class="form-section">
+                <p><strong>Bitte füllen Sie die Felder aus.</strong></p>
+                <hr/>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="vorname">Vorname <span style="color: red;">*</span></label>
+                        <input type="text" class="form-control" id="vorname" name="vorname" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="nachname">Nachname <span style="color: red;">*</span></label>
+                        <input type="text" class="form-control" id="nachname" name="nachname" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="rufnummer">Rufnummer <span style="color: red;">*</span></label>
+                        <input type="tel" class="form-control" id="rufnummer" name="rufnummer" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="email">E-Mail <span style="color: red;">*</span></label>
+                        <input type="email" class="form-control" id="email" name="email" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="wohnanschrift">Wohnanschrift <span style="color: red;">*</span></label>
+                    <input type="text" class="form-control" id="wohnanschrift" name="wohnanschrift" required>
+                    <sub>Straße + Hausnummer</sub>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="plz">PLZ <span style="color: red;">*</span></label>
+                        <input type="text" class="form-control" id="plz" name="plz" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="stadt">Stadt <span style="color: red;">*</span></label>
+                        <input type="text" class="form-control" id="stadt" name="stadt" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="fuehrerschein">Besitzen Sie einen Führerschein?</label>
+                    <select class="form-control" id="fuehrerschein" name="fuehrerschein">
+                        <option>Please Select</option>
+                        <option>Ja</option>
+                        <option>Nein</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Haben Sie einen Aufenthaltstitel inkl. einer Arbeitserlaubnis?</label>
+                    <div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="aufenthaltstitel" id="aufenthaltstitelJa" value="Ja">
+                            <label class="form-check-label" for="aufenthaltstitelJa">Ja</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="aufenthaltstitel" id="aufenthaltstitelNein" value="Nein">
+                            <label class="form-check-label" for="aufenthaltstitelNein">Nein</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="aufenthaltstitel" id="aufenthaltstitelDeutsche" value="Ich habe eine Deutsche Staatsangehörigkeit">
+                            <label class="form-check-label" for="aufenthaltstitelDeutsche">Ich habe eine Deutsche Staatsangehörigkeit</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Job Information -->
+            <div class="form-section">
+                <h4>Stelleninformationen</h4>
+                <hr>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="stelle">Sie suchen eine Stelle auf...? <span style="color: red;">*</span></label>
+                        <select class="form-control" id="stelle" name="stelle" required>
+                            <option>Please Select</option>
+                            <option>Option 1</option>
+                            <option>Option 2</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="arbeitszeitmodell">Für Bewerbungen im Büro & Zeiteinschränkungen: Bitte wählen Sie
+                            ein Arbeitszeitmodell aus?!</label>
+                        <select class="form-control" id="arbeitszeitmodell" name="arbeitszeitmodell">
+                            <option>Please Select</option>
+                            <option>Option 1</option>
+                            <option>Option 2</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Können Sie Samstags arbeiten? <span style="color: red;">*</span></label>
+                    <div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="samstags" id="samstagsJa" value="Ja" required>
+                            <label class="form-check-label" for="samstagsJa">Ja</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="samstags" id="samstagsNein" value="Nein">
+                            <label class="form-check-label" for="samstagsNein">Nein</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="samstags" id="samstagsMax" value="max">
+                            <label class="form-check-label" for="samstagsMax">max. jeden zweiten Samstag</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="bewerbungStelle">Auf welche Stelle bewerben Sie sich? <span style="color: red;">*</span></label>
+                        <select class="form-control" id="bewerbungStelle" name="bewerbungStelle" required>
+                            <option>Please Select</option>
+                            <option>Option 1</option>
+                            <option>Option 2</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="ausbildungsplatz">Ausbildungsplatz</label>
+                        <select class="form-control" id="ausbildungsplatz" name="ausbildungsplatz">
+                            <option>Please Select</option>
+                            <option>Option 1</option>
+                            <option>Option 2</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="gehalt">Was ist Ihr gewünschtes Gehalt? <span style="color: red;">*</span></label>
+                        <input type="text" class="form-control" id="gehalt" name="gehalt" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="startdatum">Startdatum? <span style="color: red;">*</span></label>
+                        <input type="text" class="form-control datepicker" id="startdatum" name="startdatum" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Sind Sie bereit 1-2 Tage auf Probe zu Arbeiten? <span style="color: red;">*</span></label>
+                    <div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="probe" id="probeJa" value="Ja" required>
+                            <label class="form-check-label" for="probeJa">Ja</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="probe" id="probeNein" value="Nein">
+                            <label class="form-check-label" for="probeNein">Nein</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Haben Sie eine abgeschlossene Berufsausbildung? <span style="color: red;">*</span></label>
+                    <div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="ausbildung" id="ausbildungJa" value="Ja" required>
+                            <label class="form-check-label" for="ausbildungJa">Ja</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="ausbildung" id="ausbildungNein" value="Nein">
+                            <label class="form-check-label" for="ausbildungNein">Nein</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="ausbildung" id="ausbildungZusatz" value="Zusatz">
+                            <label class="form-check-label" for="ausbildungZusatz">+ Zusatzqualifikationen</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Haben Sie Berufserfahrung in dem Bereich, worauf Sie sich heute bewerben? <span style="color: red;">*</span></label>
+                    <div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="erfahrung" id="erfahrungJa" value="Ja" required>
+                            <label class="form-check-label" for="erfahrungJa">Ja</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="erfahrung" id="erfahrungNein" value="Nein">
+                            <label class="form-check-label" for="erfahrungNein">Nein</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Work History -->
+            <div class="form-section" id="work-history-section">
+                <h4>Ihr letztes Arbeitsverhältnis?</h4>
+                <div id="no-work-history-message" class="text-muted" style="display: none;">
+                    Keine vorherriges Arbeitsverhältnis angeben.
+                </div>
+                <div class="work-history-entry">
+                    <div class="form-group">
+                        <label for="unternehmen">Unternehmen</label>
+                        <input type="text" class="form-control" name="unternehmen[]">
+                    </div>
+                    <div class="form-group">
+                        <label for="position">Position</label>
+                        <input type="text" class="form-control" name="position[]">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="von">von</label>
+                            <input type="text" class="form-control datepicker" name="von[]">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="bis">bis</label>
+                            <input type="text" class="form-control datepicker" name="bis[]">
+                        </div>
+                    </div>
+                    <span class="remove-btn">Entfernen</span>
+                    <hr>
+                </div>
+            </div>
+            <button type="button" class="btn btn-link" id="add-more-btn">Hinzufügen +</button>
+
+            <!-- File Upload -->
+            <div class="form-section">
+                <div class="form-group">
+                    <label for="lebenslauf">(Anschreiben-) Lebenslauf</label>
+                    <div class="file-drop-area">
+                        <span class="icon">&#8682;</span>
+                        <span class="instructions">Browse Files<br>Drag and drop files here</span>
+                        <input type="file" id="lebenslauf" name="lebenslauf">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="zeugnisse">Zeugnisse & Co.</label>
+                    <div class="file-drop-area">
+                        <span class="icon">&#8682;</span>
+                        <span class="instructions">Browse Files<br>Drag and drop files here</span>
+                        <input type="file" id="zeugnisse" name="zeugnisse">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Terms and Conditions -->
+            <div class="form-group">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="terms" name="terms" required>
+                    <label class="form-check-label" for="terms">
+                        Ich stimme der <a href="#">A.G.B</a> zu. <span style="color: red;">*</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Signature and Date -->
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="datum">Datum</label>
+                    <input type="text" class="form-control datepicker" id="datum" name="datum">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="signature-pad-container">Unterschrift</label>
+                    <div id="signature-pad-container">
+                        <canvas id="signature-pad" class="form-control" name="unterschrift"></canvas>
+                        <span class="clear-btn">&#10006;</span>
+                    </div>
+                    <input type="hidden" id="signature-data" name="signature-data">
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="btn btn-primary">Absenden</button>
+        </form>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.de.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var canvas = document.getElementById('signature-pad');
+            var signaturePad = new SignaturePad(canvas);
+            var clearButton = document.querySelector('.clear-btn');
+            var form = document.getElementById('application-form');
+            var signatureDataInput = document.getElementById('signature-data');
+
+            function resizeCanvas() {
+                var ratio = Math.max(window.devicePixelRatio || 1, 1);
+                canvas.width = canvas.offsetWidth * ratio;
+                canvas.height = canvas.offsetHeight * ratio;
+                canvas.getContext("2d").scale(ratio, ratio);
+                signaturePad.clear(); // otherwise isEmpty() might return incorrect value
+            }
+
+            window.addEventListener('resize', resizeCanvas);
+            resizeCanvas();
+
+            clearButton.addEventListener('click', function () {
+                signaturePad.clear();
+            });
+
+            form.addEventListener('submit', function (event) {
+                if (!signaturePad.isEmpty()) {
+                    signatureDataInput.value = signaturePad.toDataURL();
+                }
+            });
+
+            var addMoreButton = document.getElementById('add-more-btn');
+            var workHistorySection = document.getElementById('work-history-section');
+            var initialEntry = document.querySelector('.work-history-entry');
+            var noWorkHistoryMessage = document.getElementById('no-work-history-message');
+
+            // Function to show/hide the "no work history" message
+            function toggleNoWorkHistoryMessage() {
+                if (document.querySelectorAll('.work-history-entry').length === 0) {
+                    noWorkHistoryMessage.style.display = 'block';
+                } else {
+                    noWorkHistoryMessage.style.display = 'none';
+                }
+            }
+
+            // Function to add remove functionality
+            function addRemoveFunctionality(entry) {
+                entry.querySelector('.remove-btn').addEventListener('click', function () {
+                    this.parentElement.remove();
+                    toggleNoWorkHistoryMessage();
+                });
+            }
+
+            // Function to add a new entry
+            function addNewEntry() {
+                var newEntry = initialEntry.cloneNode(true);
+                newEntry.querySelectorAll('input').forEach(function (input) {
+                    input.value = '';
+                });
+                newEntry.querySelectorAll('.datepicker').forEach(function (input) {
+                    $(input).datepicker({
+                        format: "dd.mm.yyyy",
+                        language: "de",
+                        autoclose: true
+                    });
+                });
+                addRemoveFunctionality(newEntry);
+                workHistorySection.appendChild(newEntry);
+                toggleNoWorkHistoryMessage();
+            }
+
+            // Initial setup
+            addRemoveFunctionality(initialEntry);
+            toggleNoWorkHistoryMessage();
+
+            // Add more button functionality
+            addMoreButton.addEventListener('click', function () {
+                addNewEntry();
+            });
+
+            // Datepicker setup
+            $('.datepicker').datepicker({
+                format: "dd.mm.yyyy",
+                language: "de",
+                autoclose: true
+            });
+
+            // File upload area
+            $('.file-drop-area').on('dragenter dragover', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                $(this).addClass('dragging');
+            });
+
+            $('.file-drop-area').on('dragleave dragend drop', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                $(this).removeClass('dragging');
+            });
+
+            $('.file-drop-area input[type="file"]').on('change', function (e) {
+                var fileName = e.target.files[0].name;
+                $(this).siblings('.instructions').text(fileName);
+            });
+        });
+    </script>
+</body>
+
+</html>

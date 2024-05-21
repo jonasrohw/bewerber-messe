@@ -1,0 +1,30 @@
+Unique ID: 19
+Vorname: asdasd
+Nachname: qweqwe
+Rufnummer: 123123
+Email: 123123@gmail.com
+Wohnanschrift: 123123
+PLZ: 54224
+Stadt: 123123
+Führerschein: Nein
+Aufenthaltstitel: Ich habe eine Deutsche Staatsangehörigkeit
+Stelle: Option 1
+Arbeitszeitmodell: Option 1
+Samstags: Nein
+Bewerbung Stelle: Option 1
+Ausbildungsplatz: Option 1
+Gehalt: 200
+Startdatum: 22.05.2024
+Probe: Nein
+Ausbildung: Ja
+Erfahrung: Ja
+Datum: 21.05.2024
+
+Work History:
+Unternehmen: 23
+Position: 123
+Von: 21.05.2024
+Bis: 22.05.2024
+
+Lebenslauf: 
+Zeugnisse: 
